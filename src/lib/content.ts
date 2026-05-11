@@ -47,11 +47,11 @@ export const projects: Project[] = [
     title: "Nexora",
     subtitle: "Full-stack SaaS replacing paper-based dental lab workflows",
     description:
-      "A web platform connecting dental clinics with prosthetic laboratories. Dentists submit digital orders with STL files, labs manage production, print queues, shipments, and invoicing — all in one system. **Formlabs PreForm API integration** bridges digital design and physical manufacturing: STL files sent to physical 3D printers, with print status polled in real time.",
+      "A web platform connecting dental clinics with prosthetic laboratories. Dentists submit digital orders with STL files, labs manage production, print queues, shipments, and invoicing - all in one system. **Formlabs PreForm API integration** bridges digital design and physical manufacturing: STL files sent to physical 3D printers, with print status polled in real time.",
     highlights: [
-      "Spring Boot 3.5 / Java 21 — 15 REST controllers, 22 JPA entities, 20 Flyway migrations",
-      "Real-time updates via WebSocket / STOMP — live 3D printer status, order progress",
-      "Formlabs PreForm API integration — sends STL files to printers, polls status every 10s",
+      "Spring Boot 3.5 / Java 21 - 15 REST controllers, 22 JPA entities, 20 Flyway migrations",
+      "Real-time updates via WebSocket / STOMP - live 3D printer status, order progress",
+      "Formlabs PreForm API integration - sends STL files to printers, polls status every 10s",
       "JWT auth + RBAC across three roles (CLIENT, LAB_TECH, ADMIN)",
       "Multi-tenant architecture with partner relationships and custom pricing",
       "Automatic invoice generation with price-locking on status change",
@@ -74,8 +74,8 @@ export const projects: Project[] = [
     ],
     wow: "A dentist uploads an STL file and Nexora manages everything through to 3D printing and delivery.",
     status: "production",
-    statusLabel: "Production — private repo",
-    year: "2024 — 2026",
+    statusLabel: "Production - private repo",
+    year: "2024 - 2026",
     media: {
       ctaLabel: "View usage demo",
       href: "/projects/nexora",
@@ -84,15 +84,15 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/projects/nexora/technikdashboard.png",
-        caption: "Lab technician dashboard — daily overview of orders and production state",
+        caption: "Lab technician dashboard - daily overview of orders and production state",
       },
       {
         src: "/projects/nexora/panel_technika_dodawanie_zlecenia.png",
-        caption: "New order — submission flow on the lab side",
+        caption: "New order - submission flow on the lab side",
       },
       {
         src: "/projects/nexora/panel_druku_3D.png",
-        caption: "3D print panel — queue and live job status",
+        caption: "3D print panel - queue and live job status",
       },
       {
         src: "/projects/nexora/panel_druku_przygotowana_nakladka_przezformlabs_API.png",
@@ -100,11 +100,11 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/nexora/panel_przesylek.png",
-        caption: "Shipments — outbound deliveries to clinics",
+        caption: "Shipments - outbound deliveries to clinics",
       },
       {
         src: "/projects/nexora/panel_faktur.png",
-        caption: "Invoices — auto-generated with price locking on status change",
+        caption: "Invoices - auto-generated with price locking on status change",
       },
     ],
   },
@@ -116,7 +116,7 @@ export const projects: Project[] = [
     description:
       "Two interconnected components aimed at an end-to-end pipeline from raw 3D scan to generated aligner geometry. A C++ module procedurally generates dental overlay meshes from tooth models. A PyTorch neural network is being trained to segment teeth from 3D scans and feed clean geometry into the generator.",
     highlights: [
-      "Modern C++17 — custom geometry algorithms, STL file processing",
+      "Modern C++17 - custom geometry algorithms, STL file processing",
       "Procedural aligner mesh generation (~80% complete)",
       "PyTorch segmentation model trained on dental mesh data",
       "Target pipeline: raw 3D scan → segmented teeth → generated aligner",
@@ -129,10 +129,10 @@ export const projects: Project[] = [
       "NumPy",
       "CMake",
     ],
-    wow: "End-to-end pipeline from raw 3D scan to printable aligner — tooth segmentation in PyTorch, mesh generation in modern C++.",
+    wow: "End-to-end pipeline from raw 3D scan to printable aligner - tooth segmentation in PyTorch, mesh generation in modern C++.",
     status: "active",
-    statusLabel: "Active development — private repo",
-    year: "2025 — present",
+    statusLabel: "Active development - private repo",
+    year: "2025 - present",
     media: {
       ctaLabel: "View screenshots",
       href: "/projects/dental-cad",
@@ -144,17 +144,17 @@ export const projects: Project[] = [
     index: "03",
     title: "Satellite Simulator",
     subtitle:
-      "Multi-layer LEO satellite simulator — onboard computer in C++ / FreeRTOS, FastAPI bridge, and a planned Mission Control dashboard",
+      "Multi-layer LEO satellite simulator - onboard computer in C++ / FreeRTOS, FastAPI bridge, and a planned Mission Control dashboard",
     description:
       "A satellite simulation system modeled on real onboard-computer architecture, running on a Low Earth Orbit profile. The embedded layer in C++17 + FreeRTOS (POSIX port) emulates a hard real-time flight computer. A Python / FastAPI bridge exposes the live state over REST + WebSocket for an upcoming Mission Control dashboard.",
     highlights: [
       "FreeRTOS scheduler managing 6 concurrent tasks at differing priorities",
-      "SensorTask — generates IMU (gyro, accel) + temperature with realistic Gaussian noise every 100 ms",
-      "OrbitTask — real-time satellite position (lat / lon / alt) using Kepler's laws; 95-min orbital period, 7,588 m/s at 550 km altitude",
-      "LaserTask — optical-link simulation with atmospheric attenuation, scintillation, and Bit Error Rate calculation",
-      "WatchdogTask (priority 3) — supervises system liveness via binary semaphore",
+      "SensorTask - generates IMU (gyro, accel) + temperature with realistic Gaussian noise every 100 ms",
+      "OrbitTask - real-time satellite position (lat / lon / alt) using Kepler's laws; 95-min orbital period, 7,588 m/s at 550 km altitude",
+      "LaserTask - optical-link simulation with atmospheric attenuation, scintillation, and Bit Error Rate calculation",
+      "WatchdogTask (priority 3) - supervises system liveness via binary semaphore",
       "Inter-task communication via separated FreeRTOS queues, one per recipient",
-      "Python / FastAPI bridge (in progress) — TCP socket receives C++ telemetry, exposes REST + WebSocket; async broadcast to multiple WebSocket clients simultaneously",
+      "Python / FastAPI bridge (in progress) - TCP socket receives C++ telemetry, exposes REST + WebSocket; async broadcast to multiple WebSocket clients simultaneously",
       "Planned: React Mission Control dashboard with live telemetry charts and 3D orbit visualization",
     ],
     tech: [
@@ -176,10 +176,10 @@ export const projects: Project[] = [
       "POSIX sockets",
       "TCP/IP",
     ],
-    wow: "A real RTOS kernel — the same technology that runs on actual CubeSats — handling sensor fusion, orbital mechanics, optical-link physics and watchdog supervision, all built from scratch.",
+    wow: "A real RTOS kernel - the same technology that runs on actual CubeSats - handling sensor fusion, orbital mechanics, optical-link physics and watchdog supervision, all built from scratch.",
     status: "in-progress",
-    statusLabel: "C++ layer complete — Python bridge in progress",
-    year: "2025 — present",
+    statusLabel: "C++ layer complete - Python bridge in progress",
+    year: "2025 - present",
     media: {
       ctaLabel: "View screenshots",
       href: "/projects/satellite-sim",
@@ -188,26 +188,26 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/projects/satellite-sim/mission_control_panel.png",
-        caption: "Mission Control panel — live telemetry from the simulated onboard computer",
+        caption: "Mission Control panel - live telemetry from the simulated onboard computer",
       },
     ],
   },
   {
     id: "homelab",
     index: "04",
-    title: "Homelab — Design & Cost Estimate",
+    title: "Homelab - Design & Cost Estimate",
     subtitle:
-      "Network architecture, hardware shortlist, and cost estimate for a self-hosted private cloud / surveillance / Smart Home stack — physical build planned for summer 2026",
+      "Network architecture, hardware shortlist, and cost estimate for a self-hosted private cloud / surveillance / Smart Home stack - physical build planned for summer 2026",
     description:
-      "Currently a planning project, not a finished system. The design stage is done: full network topology with VLAN segmentation, structured-cabling plan, bill of materials, and cost estimate. Physical assembly is scheduled for summer break 2026 — built incrementally in free time alongside studies. The target architecture: a Proxmox VE hypervisor on a 20W mini-PC running isolated services for AI video analytics (Frigate + Google Coral TPU), private cloud (Nextcloud), Smart Home (Home Assistant integrated with existing Fibaro hardware), DNS-level ad-blocking (AdGuard), and zero-port-forward remote access (Tailscale / WireGuard). All data stays on-premise.",
+      "Currently a planning project, not a finished system. The design stage is done: full network topology with VLAN segmentation, structured-cabling plan, bill of materials, and cost estimate. Physical assembly is scheduled for summer break 2026 - built incrementally in free time alongside studies. The target architecture: a Proxmox VE hypervisor on a 20W mini-PC running isolated services for AI video analytics (Frigate + Google Coral TPU), private cloud (Nextcloud), Smart Home (Home Assistant integrated with existing Fibaro hardware), DNS-level ad-blocking (AdGuard), and zero-port-forward remote access (Tailscale / WireGuard). All data stays on-premise.",
     highlights: [
-      "Proxmox VE bare-metal hypervisor — every service runs as an isolated LXC / KVM, zero-downtime updates",
-      "Frigate NVR + Google Coral USB TPU — 4 TOPS local inference at ~2W, real-time human/vehicle classification across all cameras, no cloud round-trip",
-      "Camera network isolated on VLAN 10 (802.1Q) — compromised IP cam cannot reach domestic devices",
-      "Beelink N100 mini-PC, 16GB RAM, 6–20W idle — 24/7 ops at ~15–30 PLN/month electricity",
-      "TerraMaster D4-320 over USB-C 10 Gbps — WD Purple 4TB for video, IronWolf 6TB for NAS / backups",
-      "Tailscale mesh (WireGuard) for remote access — no port forwarding, no exposed router",
-      "Scrutiny S.M.A.R.T. monitoring — predictive disk-failure alerts before data loss",
+      "Proxmox VE bare-metal hypervisor - every service runs as an isolated LXC / KVM, zero-downtime updates",
+      "Frigate NVR + Google Coral USB TPU - 4 TOPS local inference at ~2W, real-time human/vehicle classification across all cameras, no cloud round-trip",
+      "Camera network isolated on VLAN 10 (802.1Q) - compromised IP cam cannot reach domestic devices",
+      "Beelink N100 mini-PC, 16GB RAM, 6–20W idle - 24/7 ops at ~15–30 PLN/month electricity",
+      "TerraMaster D4-320 over USB-C 10 Gbps - WD Purple 4TB for video, IronWolf 6TB for NAS / backups",
+      "Tailscale mesh (WireGuard) for remote access - no port forwarding, no exposed router",
+      "Scrutiny S.M.A.R.T. monitoring - predictive disk-failure alerts before data loss",
       "Outdoor Cat 5e PE cabling with downward-sloped wall penetrations and weather-sealed openings",
     ],
     tech: [
@@ -223,10 +223,10 @@ export const projects: Project[] = [
       "Linux / LXC",
       "Docker",
     ],
-    wow: "Designed end-to-end before any hardware is bought — topology, segmentation, hardware shortlist, and cost estimate locked in.",
+    wow: "Designed end-to-end before any hardware is bought - topology, segmentation, hardware shortlist, and cost estimate locked in.",
     status: "in-progress",
     statusLabel: "Planning stage · physical build summer 2026",
-    year: "2026 — planning",
+    year: "2026 - planning",
     media: {
       ctaLabel: "View design & cost estimate",
       href: "/projects/homelab",
@@ -234,7 +234,7 @@ export const projects: Project[] = [
     },
     documents: [
       {
-        title: "Oferta Techniczna — Prywatny Ekosystem Cyfrowy i Inteligentny Monitoring AI",
+        title: "Oferta Techniczna - Prywatny Ekosystem Cyfrowy i Inteligentny Monitoring AI",
         href: "/projects/homelab/homelab-oferta-techniczna.pdf",
         pages: 7,
         lang: "Polish",
@@ -249,9 +249,9 @@ export const projects: Project[] = [
     title: "Web Work",
     subtitle: "Production frontend, when a project calls for one",
     description:
-      "Frontend is a tool I reach for happily — but the work I want to be doing sits a few layers below the UI: backend, embedded, networks. Listed here for context.",
+      "Frontend is a tool I reach for happily - but the work I want to be doing sits a few layers below the UI: backend, embedded, networks. Listed here for context.",
     highlights: [
-      "apmdental.pl — production site for a dental practice, built and deployed solo on Next.js / Vercel",
+      "apmdental.pl - production site for a dental practice, built and deployed solo on Next.js / Vercel",
     ],
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     wow: "",
@@ -346,13 +346,13 @@ export const meta = {
   name: "Antek Pietraszewski",
   role: "ICT Engineering Student · Systems Builder",
   school: "AGH University of Science and Technology",
-  program: "Teleinformatyka (ICT) — 4th semester, BSc",
+  program: "Teleinformatyka (ICT) - 4th semester, BSc",
   focus: "Networks, embedded, systems programming",
-  longTerm: "Software at the intersection of critical infrastructure — aerospace, medical, telecom",
+  longTerm: "Software at the intersection of critical infrastructure - aerospace, medical, telecom",
 };
 
 export const aboutIntro =
-  "Fourth-semester ICT student at AGH Kraków. Building systems that have to hold up under pressure — both ends of the stack, both for clients and for myself.";
+  "Fourth-semester ICT student at AGH Kraków. Building systems that have to hold up under pressure - both ends of the stack, both for clients and for myself.";
 
 export interface AboutSection {
   label: string;
@@ -366,15 +366,15 @@ export const aboutSections: AboutSection[] = [
   },
   {
     label: "Building",
-    body: "Nexora and Dental CAD on my own time — full-stack systems with real users behind them. Occasional production websites when someone asks for one.",
+    body: "Nexora and Dental CAD on my own time - full-stack systems with real users behind them. Occasional production websites when someone asks for one.",
   },
   {
     label: "Direction",
-    body: "Reliable, secure systems — networking, embedded, systems programming. Picking up Rust next, for the same reasons.",
+    body: "Reliable, secure systems - networking, embedded, systems programming. Picking up Rust next, for the same reasons.",
   },
   {
     label: "Off-screen",
-    body: "Physical training and endurance racing — competed in a few triathlons, including a full Ironman finish.",
+    body: "Physical training and endurance racing - competed in a few triathlons, including a full Ironman finish.",
   },
 ];
 
