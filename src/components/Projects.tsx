@@ -119,7 +119,7 @@ function ProjectCard({ project }: { project: Project }) {
           )}
 
           {project.media && (
-            <div className="pt-2">
+            <div className="pt-2 print-hide">
               <a
                 href={project.media.href}
                 target={project.media.external ? "_blank" : undefined}
@@ -174,7 +174,7 @@ export default function Projects() {
     <section
       id="projects"
       aria-label="Projects"
-      className="relative py-24 md:py-32 scroll-mt-20"
+      className="relative py-16 md:py-20 scroll-mt-20"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionLabel

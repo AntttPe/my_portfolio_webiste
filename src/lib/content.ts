@@ -7,6 +7,19 @@ export interface ProjectMedia {
   kind?: "demo" | "screenshots" | "documentation" | "external";
 }
 
+export interface ProjectScreenshot {
+  src: string;
+  caption: string;
+}
+
+export interface ProjectDocument {
+  title: string;
+  href: string;
+  pages?: number;
+  lang?: string;
+  description?: string;
+}
+
 export interface Project {
   id: string;
   index: string;
@@ -23,6 +36,8 @@ export interface Project {
   href?: string;
   year: string;
   media?: ProjectMedia;
+  screenshots?: ProjectScreenshot[];
+  documents?: ProjectDocument[];
 }
 
 export const projects: Project[] = [
@@ -66,6 +81,32 @@ export const projects: Project[] = [
       href: "/projects/nexora",
       kind: "demo",
     },
+    screenshots: [
+      {
+        src: "/projects/nexora/technikdashboard.png",
+        caption: "Lab technician dashboard — daily overview of orders and production state",
+      },
+      {
+        src: "/projects/nexora/panel_technika_dodawanie_zlecenia.png",
+        caption: "New order — submission flow on the lab side",
+      },
+      {
+        src: "/projects/nexora/panel_druku_3D.png",
+        caption: "3D print panel — queue and live job status",
+      },
+      {
+        src: "/projects/nexora/panel_druku_przygotowana_nakladka_przezformlabs_API.png",
+        caption: "Aligner overlay prepared and sent to the printer via the Formlabs API",
+      },
+      {
+        src: "/projects/nexora/panel_przesylek.png",
+        caption: "Shipments — outbound deliveries to clinics",
+      },
+      {
+        src: "/projects/nexora/panel_faktur.png",
+        caption: "Invoices — auto-generated with price locking on status change",
+      },
+    ],
   },
   {
     id: "dental-cad",
@@ -76,10 +117,9 @@ export const projects: Project[] = [
       "Two interconnected components aimed at an end-to-end pipeline from raw 3D scan to generated aligner geometry. A C++ module procedurally generates dental overlay meshes from tooth models. A PyTorch neural network is being trained to segment teeth from 3D scans and feed clean geometry into the generator.",
     highlights: [
       "Modern C++17 — custom geometry algorithms, STL file processing",
-      "Procedural aligner mesh generation written from scratch (~80% complete)",
+      "Procedural aligner mesh generation (~80% complete)",
       "PyTorch segmentation model trained on dental mesh data",
-      "End-to-end target: raw 3D scan → segmented teeth → generated aligner",
-      "Replacing workflows that commercial orthodontic CAD tools charge thousands for",
+      "Target pipeline: raw 3D scan → segmented teeth → generated aligner",
     ],
     tech: [
       "C++17",
@@ -89,7 +129,7 @@ export const projects: Project[] = [
       "NumPy",
       "CMake",
     ],
-    wow: "Writing the kind of software that orthodontic CAD tools sell for thousands of dollars — from scratch, in C++.",
+    wow: "End-to-end pipeline from raw 3D scan to printable aligner — tooth segmentation in PyTorch, mesh generation in modern C++.",
     status: "active",
     statusLabel: "Active development — private repo",
     year: "2025 — present",
@@ -145,15 +185,21 @@ export const projects: Project[] = [
       href: "/projects/satellite-sim",
       kind: "screenshots",
     },
+    screenshots: [
+      {
+        src: "/projects/satellite-sim/mission_control_panel.png",
+        caption: "Mission Control panel — live telemetry from the simulated onboard computer",
+      },
+    ],
   },
   {
     id: "homelab",
     index: "04",
-    title: "Homelab",
+    title: "Homelab — Design & Cost Estimate",
     subtitle:
-      "Private digital ecosystem — on-prem AI surveillance, cloud, and Smart Home hub on a 20W mini-PC",
+      "Network architecture, hardware shortlist, and cost estimate for a self-hosted private cloud / surveillance / Smart Home stack — physical build planned for summer 2026",
     description:
-      "A self-hosted alternative to the Google Drive / Nest Cam / Alexa subscription stack — designed end-to-end on paper, with assembly scheduled for June 2026. So far: full network plan (VLAN segmentation, structured cabling), bill of materials, and cost estimate ready. The architecture: bare-metal Proxmox VE hypervisor running isolated services for AI video analytics (Frigate + Google Coral TPU), private cloud (Nextcloud), Smart Home (Home Assistant integrated with existing Fibaro hardware), DNS-level ad-blocking (AdGuard) and zero-port-forward remote access (Tailscale / WireGuard). All data stays on-premise — nothing leaves the LAN.",
+      "Currently a planning project, not a finished system. The design stage is done: full network topology with VLAN segmentation, structured-cabling plan, bill of materials, and cost estimate. Physical assembly is scheduled for summer break 2026 — built incrementally in free time alongside studies. The target architecture: a Proxmox VE hypervisor on a 20W mini-PC running isolated services for AI video analytics (Frigate + Google Coral TPU), private cloud (Nextcloud), Smart Home (Home Assistant integrated with existing Fibaro hardware), DNS-level ad-blocking (AdGuard), and zero-port-forward remote access (Tailscale / WireGuard). All data stays on-premise.",
     highlights: [
       "Proxmox VE bare-metal hypervisor — every service runs as an isolated LXC / KVM, zero-downtime updates",
       "Frigate NVR + Google Coral USB TPU — 4 TOPS local inference at ~2W, real-time human/vehicle classification across all cameras, no cloud round-trip",
@@ -177,15 +223,25 @@ export const projects: Project[] = [
       "Linux / LXC",
       "Docker",
     ],
-    wow: "An on-prem replacement for the entire subscription stack — surveillance, cloud, and home automation — running on a 20W mini-PC and a USB-stick AI accelerator.",
+    wow: "Designed end-to-end before any hardware is bought — topology, segmentation, hardware shortlist, and cost estimate locked in.",
     status: "in-progress",
-    statusLabel: "Planning · build in June 2026",
-    year: "2026 — present",
+    statusLabel: "Planning stage · physical build summer 2026",
+    year: "2026 — planning",
     media: {
-      ctaLabel: "View documentation",
+      ctaLabel: "View design & cost estimate",
       href: "/projects/homelab",
       kind: "documentation",
     },
+    documents: [
+      {
+        title: "Oferta Techniczna — Prywatny Ekosystem Cyfrowy i Inteligentny Monitoring AI",
+        href: "/projects/homelab/homelab-oferta-techniczna.pdf",
+        pages: 7,
+        lang: "Polish",
+        description:
+          "Full technical proposal: network topology, VLAN segmentation, hardware shortlist, bill of materials, and cost estimate.",
+      },
+    ],
   },
   {
     id: "web",
@@ -243,8 +299,6 @@ export const skillGroups: SkillGroup[] = [
     items: [
       { name: "React 19", level: "core" },
       { name: "Next.js", level: "core" },
-      { name: "TanStack Query", level: "working" },
-      { name: "Zustand", level: "working" },
       { name: "Tailwind CSS", level: "core" },
     ],
   },
@@ -262,7 +316,7 @@ export const skillGroups: SkillGroup[] = [
   {
     category: "Networking",
     items: [
-      { name: "Cisco CCNA (3/3)", level: "growing" },
+      { name: "Cisco CCNA (2/3 done)", level: "growing" },
       { name: "Routing protocols", level: "working" },
       { name: "VLANs / 802.1Q", level: "working" },
       { name: "Subnetting", level: "working" },
@@ -282,9 +336,9 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 export const contact = {
-  email: "antek.pietraszewski@example.com",
-  github: "https://github.com/antekpietraszewski",
-  linkedin: "https://linkedin.com/in/antek-pietraszewski",
+  email: "pietracha10@icloud.com",
+  github: "https://github.com/AntttPe",
+  linkedin: "",
   location: "Kraków, Poland",
 };
 
@@ -325,12 +379,27 @@ export const aboutSections: AboutSection[] = [
 ];
 
 export const aboutPhoto = {
-  // Flip to true after dropping the photo at public/me-triathlon.jpg
-  enabled: false,
-  src: "/me-triathlon.jpg",
+  enabled: true,
+  src: "/personal/me-triathlon.jpg",
   alt: "Antek at the finish line of an Ironman triathlon, holding the medal",
   caption: "ironman finish",
 };
+
+export interface Credential {
+  title: string;
+  issuer: string;
+  year: string;
+  href: string;
+}
+
+export const credentials: Credential[] = [
+  {
+    title: "CCNA: Switching, Routing & Wireless Essentials",
+    issuer: "Cisco Networking Academy · Instytut Telekomunikacji AGH",
+    year: "2026",
+    href: "/personal/ccna-srwe.pdf",
+  },
+];
 
 export interface AboutStat {
   label: string;
@@ -340,5 +409,5 @@ export interface AboutStat {
 export const aboutStats: AboutStat[] = [
   { label: "Studies", value: "4th sem" },
   { label: "CCNA", value: "2/3 done" },
-  { label: "Ironman", value: "1× finish" },
+  { label: "Languages", value: "EN B2 · PL native" },
 ];

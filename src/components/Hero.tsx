@@ -3,7 +3,7 @@ export default function Hero() {
     <section
       id="top"
       aria-label="Intro"
-      className="relative pt-32 pb-24 md:pt-44 md:pb-36 overflow-hidden"
+      className="relative pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden"
     >
       <div className="absolute inset-0 bg-grid opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)] pointer-events-none" />
       <div
@@ -34,10 +34,24 @@ export default function Hero() {
               </span>
             </h1>
 
+            <a
+              href="#contact"
+              className="inline-flex self-start items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[color:var(--color-accent)]/40 bg-[color:var(--color-accent)]/10 hover:bg-[color:var(--color-accent)]/15 hover:border-[color:var(--color-accent)]/60 transition-colors cursor-pointer"
+              aria-label="Available for summer 2026 internship - go to contact"
+            >
+              <span className="relative inline-flex h-2 w-2 shrink-0">
+                <span className="absolute inset-0 rounded-full bg-[color:var(--color-accent)] pulse-dot" />
+                <span className="absolute inset-0 rounded-full bg-[color:var(--color-accent)]" />
+              </span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--color-accent)]">
+                Available · Summer 2026 internship
+              </span>
+            </a>
+
             <p className="max-w-2xl text-lg md:text-xl text-[color:var(--color-text-muted)] text-pretty leading-relaxed">
               ICT engineering student at{" "}
               <span className="text-[color:var(--color-text)]">AGH Kraków</span>,
-              building systems that have to work when they&rsquo;re supposed to —
+              building systems that have to work when they&rsquo;re supposed to -
               backend platforms in Java, embedded firmware in C++, and the
               occasional neural network when the problem calls for it.
             </p>
@@ -48,7 +62,7 @@ export default function Hero() {
               { label: "Program", value: "Teleinformatyka" },
               { label: "Year", value: "4th semester" },
               { label: "Location", value: "Kraków, PL" },
-              { label: "Status", value: "Available for internships" },
+              { label: "Status", value: "Summer 2026 intern" },
             ].map((item) => (
               <div
                 key={item.label}
@@ -64,7 +78,7 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 mt-4">
+          <div className="flex flex-col sm:flex-row gap-3 mt-4 print-hide">
             <a
               href="#projects"
               className="group inline-flex items-center justify-center gap-2 px-5 py-3 bg-[color:var(--color-text)] text-[color:var(--color-bg)] rounded-md font-medium text-sm hover:bg-[color:var(--color-accent)] transition-colors cursor-pointer"
@@ -95,7 +109,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Meta row — coordinates / timestamp style */}
+        {/* Meta row - coordinates / timestamp style */}
         <div className="mt-20 md:mt-28 pt-6 border-t border-[color:var(--color-border)] flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 font-mono text-[11px] text-[color:var(--color-text-dim)]">
           <div className="flex items-center gap-2">
             <span className="text-[color:var(--color-accent)]">◈</span>

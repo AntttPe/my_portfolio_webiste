@@ -6,18 +6,10 @@ export default function Skills() {
     <section
       id="stack"
       aria-label="Stack"
-      className="relative py-24 md:py-32 scroll-mt-20"
+      className="relative py-16 md:py-20 scroll-mt-20"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionLabel num="03" title="Stack" kicker="Tools I reach for" />
-
-        <p className="mb-10 font-mono text-[11px] text-[color:var(--color-text-dim)] max-w-xl">
-          <span className="italic text-[color:var(--color-text-muted)]">
-            italic
-          </span>{" "}
-          = currently learning. everything else is something I&rsquo;ve used in
-          a real project.
-        </p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[color:var(--color-border)] border border-[color:var(--color-border)] rounded-xl overflow-hidden">
           {skillGroups.map((group) => (
@@ -48,6 +40,25 @@ export default function Skills() {
               </ul>
             </div>
           ))}
+        </div>
+
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+          <div className="flex items-center gap-2.5">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-md border border-[color:var(--color-border)] text-[12.5px] text-[color:var(--color-text-muted)]">
+              Python
+            </span>
+            <span className="font-mono text-[11px] text-[color:var(--color-text-dim)]">
+              used in a real project
+            </span>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <span className="inline-flex items-center px-2.5 py-1 italic rounded-md border border-dashed border-[color:var(--color-border)] text-[12.5px] text-[color:var(--color-text-dim)]">
+              Rust
+            </span>
+            <span className="font-mono text-[11px] text-[color:var(--color-text-dim)]">
+              currently learning · not yet shipped
+            </span>
+          </div>
         </div>
       </div>
     </section>

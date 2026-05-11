@@ -133,4 +133,104 @@
   .text-pretty {
     text-wrap: pretty;
   }
+
+  .print-hide {
+    /* hidden in print only — see @media print below */
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 1.4cm;
+  }
+
+  :root {
+    color-scheme: light;
+    --color-bg: #ffffff;
+    --color-bg-elevated: #ffffff;
+    --color-surface: #f5f5f5;
+    --color-border: #d4d4d8;
+    --color-border-hover: #d4d4d8;
+    --color-text: #18181b;
+    --color-text-muted: #3f3f46;
+    --color-text-dim: #71717a;
+    --color-accent: #047857;
+    --color-warn: #b45309;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #18181b !important;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  /* Hide site chrome */
+  header,
+  nav,
+  footer,
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Hide decorative backgrounds and animations */
+  .bg-grid,
+  .bg-dots,
+  .cursor-blink {
+    display: none !important;
+    background: none !important;
+  }
+
+  /* Hide hero gradient blob + grid mask layers */
+  section > div[class*="absolute"][class*="pointer-events-none"] {
+    display: none !important;
+  }
+
+  /* Tighten section padding for paper */
+  section {
+    padding-top: 0.4cm !important;
+    padding-bottom: 0.4cm !important;
+  }
+
+  /* Keep project cards together when possible */
+  article {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #d4d4d8 !important;
+  }
+
+  /* Avoid orphaned headings */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+    color: #18181b !important;
+  }
+
+  /* Inline external URLs after the link text */
+  a[href^="http"]::after,
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    color: #71717a;
+    font-size: 9pt;
+    word-break: break-all;
+  }
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: "";
+  }
+
+  /* Drop hover/focus chrome */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
 }

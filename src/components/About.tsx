@@ -5,6 +5,7 @@ import {
   aboutPhoto,
   aboutSections,
   aboutStats,
+  credentials,
 } from "@/lib/content";
 import SectionLabel from "./SectionLabel";
 
@@ -13,7 +14,7 @@ export default function About() {
     <section
       id="about"
       aria-label="About"
-      className="relative py-24 md:py-32 scroll-mt-20"
+      className="relative py-16 md:py-20 scroll-mt-20"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionLabel num="01" title="About" kicker="Profile" />
@@ -36,12 +37,80 @@ export default function About() {
                   </p>
                 </div>
               ))}
+
+              {credentials.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--color-accent)]">
+                    <span>Credentials</span>
+                    <span className="h-px w-8 bg-[color:var(--color-accent)]/30" />
+                  </div>
+                  <ul className="flex flex-col gap-2">
+                    {credentials.map((c) => (
+                      <li key={c.href}>
+                        <a
+                          href={c.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-start gap-3 rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-bg-elevated)] px-4 py-3 hover:border-[color:var(--color-accent)]/40 hover:bg-[color:var(--color-surface)] transition-colors"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="mt-[3px] shrink-0 text-[color:var(--color-text-dim)] group-hover:text-[color:var(--color-accent)] transition-colors"
+                            aria-hidden="true"
+                          >
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <path d="M14 2v6h6" />
+                            <path d="M12 18v-6" />
+                            <path d="M9 15l3 3 3-3" />
+                          </svg>
+                          <span className="flex flex-col gap-0.5 min-w-0">
+                            <span className="text-[14px] text-[color:var(--color-text)] group-hover:text-[color:var(--color-accent)] transition-colors text-pretty">
+                              {c.title}
+                            </span>
+                            <span className="font-mono text-[11px] text-[color:var(--color-text-dim)] text-pretty">
+                              {c.issuer} · {c.year}
+                            </span>
+                          </span>
+                          <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-text-dim)] group-hover:text-[color:var(--color-accent)] transition-colors shrink-0 pt-[3px]">
+                            pdf
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
 
           <div className="md:col-span-2">
             <div className="sticky top-24 flex flex-col gap-4">
               <PhotoBlock />
+
+              <a
+                href="https://www.agh.edu.pl/en"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="AGH University of Krakow - official site"
+                className="group flex items-center justify-center rounded-lg bg-white px-6 py-3 border border-[color:var(--color-border)] hover:border-[color:var(--color-accent)]/40 transition-colors"
+              >
+                <Image
+                  src="/personal/agh_logo.jpg"
+                  alt="AGH University of Krakow"
+                  width={418}
+                  height={509}
+                  sizes="80px"
+                  className="h-12 w-auto"
+                />
+              </a>
 
               <div className="grid grid-cols-3 gap-px bg-[color:var(--color-border)] border border-[color:var(--color-border)] rounded-lg overflow-hidden">
                 {aboutStats.map((s) => (

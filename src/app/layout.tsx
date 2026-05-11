@@ -23,7 +23,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://antek.dev"),
   title: {
-    default: "Antek Pietraszewski — ICT Engineering Student",
+    default: "Antek Pietraszewski - ICT Engineering Student",
     template: "%s · Antek Pietraszewski",
   },
   description:
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Antek Pietraszewski" }],
   creator: "Antek Pietraszewski",
   openGraph: {
-    title: "Antek Pietraszewski — ICT Engineering Student",
+    title: "Antek Pietraszewski - ICT Engineering Student",
     description:
       "Full-stack systems, embedded firmware, networking. AGH Kraków.",
     url: "https://antek.dev",

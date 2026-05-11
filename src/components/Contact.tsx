@@ -2,30 +2,30 @@ import { contact } from "@/lib/content";
 import SectionLabel from "./SectionLabel";
 
 const channels = [
-  {
+  contact.email && {
     label: "email",
     value: contact.email,
     href: `mailto:${contact.email}`,
     primary: true,
   },
-  {
+  contact.github && {
     label: "github",
     value: contact.github.replace("https://", ""),
     href: contact.github,
   },
-  {
+  contact.linkedin && {
     label: "linkedin",
     value: contact.linkedin.replace("https://", ""),
     href: contact.linkedin,
   },
-];
+].filter((c): c is { label: string; value: string; href: string; primary?: boolean } => Boolean(c));
 
 export default function Contact() {
   return (
     <section
       id="contact"
       aria-label="Contact"
-      className="relative py-24 md:py-32 scroll-mt-20"
+      className="relative py-16 md:py-20 scroll-mt-20"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionLabel num="04" title="Get in touch" kicker="Open to internships" />
@@ -35,7 +35,7 @@ export default function Contact() {
             <p className="text-lg md:text-xl leading-relaxed text-[color:var(--color-text-muted)] text-pretty">
               Looking for summer{" "}
               <span className="text-[color:var(--color-text)]">2026</span>{" "}
-              internships — backend, embedded, networking, anything where
+              internships - backend, embedded, networking, anything where
               reliability matters. If you&rsquo;re hiring, or you just want to
               talk about a project, the shortest path is email.
             </p>
@@ -77,7 +77,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 print-hide">
             <div className="border border-[color:var(--color-border)] rounded-lg overflow-hidden bg-[color:var(--color-bg-elevated)]">
               <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[color:var(--color-border)] bg-[color:var(--color-surface)]">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
