@@ -445,7 +445,7 @@ export const skillGroups: SkillGroup[] = [
 export const contact = {
   email: "pietracha10@icloud.com",
   github: "https://github.com/AntttPe",
-  linkedin: "",
+  linkedin: "https://www.linkedin.com/in/antoni-pietraszewski/",
   location: "Kraków, Poland",
 };
 
