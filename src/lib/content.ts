@@ -10,6 +10,8 @@ export interface ProjectMedia {
 export interface ProjectScreenshot {
   src: string;
   caption: string;
+  type?: "image" | "video";
+  poster?: string;
 }
 
 export interface ProjectDocument {
@@ -138,6 +140,48 @@ export const projects: Project[] = [
       href: "/projects/dental-cad",
       kind: "screenshots",
     },
+    screenshots: [
+      {
+        src: "/projects/dental-cad/01-first-segmentation-attempts.jpg",
+        caption: "First segmentation attempts on raw 3D dental scans",
+      },
+      {
+        src: "/projects/dental-cad/02-noisy-segmentation-output.jpg",
+        caption: "Early output - heavy noise, indistinct tooth boundaries",
+      },
+      {
+        src: "/projects/dental-cad/03-noise-reduction-iterations.jpg",
+        caption: "Iterating on the segmentation pipeline - progressive noise reduction",
+      },
+      {
+        src: "/projects/dental-cad/04-segmented-teeth.jpg",
+        caption: "Segmentation output - individual teeth identified and color-coded",
+      },
+      {
+        src: "/projects/dental-cad/05-clean-teeth-model.jpg",
+        caption: "Clean teeth model - segmentation output processed for use by the C++ aligner generator",
+      },
+      {
+        src: "/projects/dental-cad/06-first-voxel-aligner.jpg",
+        caption: "First voxel-based aligner geometry - early generation attempt",
+      },
+      {
+        src: "/projects/dental-cad/07-contact-surface-algorithm.jpg",
+        caption: "Algorithm for computing the aligner-tooth contact surface",
+      },
+      {
+        src: "/projects/dental-cad/08-failed-aligner-closure.jpg",
+        caption: "Failure mode - broken surface closure on the generated aligner",
+      },
+      {
+        src: "/projects/dental-cad/09-cross-section-clearance-check.jpg",
+        caption: "Cross-section analysis - verifying the aligner does not intersect or sit too close to the teeth",
+      },
+      {
+        src: "/projects/dental-cad/10-successful-aligner.jpg",
+        caption: "Successful aligner over teeth - anatomically correct fit from outside",
+      },
+    ],
   },
   {
     id: "satellite-sim",
@@ -193,8 +237,71 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "homelab",
+    id: "rocket-test-stand",
     index: "04",
+    title: "Rocket Engine Test Stand",
+    subtitle:
+      "Physical thrust measurement rig for model rocket motors - Teensy 4.1, 10 kg load cell, automated electric ignition, post-burn flight modeling",
+    description:
+      "A static thrust test stand built to characterize home-built model rocket engines before flight. The motor is bolted into a holder mounted on a 10 kg load cell; an HX711 amplifier feeds the strain-gauge signal into a Teensy 4.1, which samples and logs thrust against time during burn. Ignition is electric - a heating wire through a high-voltage relay, triggered remotely from an Arduino Uno. Post-test, the recorded F(t) curve is fed into a simple flight model to predict peak velocity and maximum altitude as a function of initial vehicle mass.",
+    highlights: [
+      "10 kg single-point load cell with HX711 24-bit amplifier (SparkFun_HX711 library)",
+      "Teensy 4.1 (Cortex-M7 @ 600 MHz) as primary logger - built-in SD card for in-burn data writes",
+      "Arduino Uno as ignition controller - heating wire driven through a high-voltage relay, remote-triggered for safety",
+      "Engine geometry modeled in Fusion 360 - convergent-divergent nozzle tuned for maximum thrust without overpressure failure",
+      "Sample rate bottlenecked by HX711 (~80 Hz max) - adequate for ~1–2 s burns, identified as the next upgrade target",
+      "Post-burn analysis: F(t) curve → rocket equation → predicted peak velocity and apogee vs. initial vehicle mass",
+    ],
+    tech: [
+      "Arduino C++",
+      "Teensy 4.1",
+      "HX711",
+      "SparkFun_HX711",
+      "Fusion 360",
+      "SD logging",
+      "Python (analysis)",
+    ],
+    wow: "Built and fired a full thrust-characterization rig - load cell, ignition control, on-board logging, and post-burn flight modeling, all from scratch.",
+    status: "complete",
+    statusLabel: "Static test campaign complete",
+    year: "2025",
+    media: {
+      ctaLabel: "View test footage & data",
+      href: "/projects/rocket-test-stand",
+      kind: "screenshots",
+    },
+    screenshots: [
+      {
+        src: "/projects/rocket-test-stand/01-load-cell-rig.jpg",
+        caption: "Thrust rig - 10 kg load cell with motor holder",
+      },
+      {
+        src: "/projects/rocket-test-stand/02-acquisition-stack.jpg",
+        caption: "Acquisition stack - Teensy 4.1 (primary logger, built-in SD) + Arduino Uno (ignition control) + external SD module",
+      },
+      {
+        src: "/projects/rocket-test-stand/03-motor-cross-section.jpg",
+        caption: "Motor design - cross-section in Fusion 360, convergent-divergent nozzle profile",
+      },
+      {
+        src: "/projects/rocket-test-stand/06-test-fire.mp4",
+        caption: "Test 4 - full burn captured on the stand",
+        type: "video",
+        poster: "/projects/rocket-test-stand/06-test-fire-poster.jpg",
+      },
+      {
+        src: "/projects/rocket-test-stand/04-thrust-curve.jpg",
+        caption: "Test 4 thrust curve - F(t) sampled at ~80 Hz via HX711, logged to SD on Teensy",
+      },
+      {
+        src: "/projects/rocket-test-stand/05-flight-simulations.jpg",
+        caption: "Post-test flight model - predicted peak velocity and maximum altitude as a function of initial vehicle mass, derived from the measured thrust curve",
+      },
+    ],
+  },
+  {
+    id: "homelab",
+    index: "05",
     title: "Homelab - Design & Cost Estimate",
     subtitle:
       "Network architecture, hardware shortlist, and cost estimate for a self-hosted private cloud / surveillance / Smart Home stack - physical build planned for summer 2026",
@@ -245,7 +352,7 @@ export const projects: Project[] = [
   },
   {
     id: "web",
-    index: "05",
+    index: "06",
     title: "Web Work",
     subtitle: "Production frontend, when a project calls for one",
     description:

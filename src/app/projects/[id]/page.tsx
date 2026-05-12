@@ -250,14 +250,25 @@ export default async function ProjectPage({ params }: PageProps) {
                   <li key={shot.src}>
                     <figure className="flex flex-col gap-3">
                       <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-[color:var(--color-border)] bg-[color:var(--color-bg-elevated)]">
-                        <Image
-                          src={shot.src}
-                          alt={shot.caption}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 896px"
-                          className="object-contain"
-                          priority={i === 0}
-                        />
+                        {shot.type === "video" ? (
+                          <video
+                            src={shot.src}
+                            poster={shot.poster}
+                            controls
+                            preload="metadata"
+                            playsInline
+                            className="absolute inset-0 h-full w-full object-contain bg-black"
+                          />
+                        ) : (
+                          <Image
+                            src={shot.src}
+                            alt={shot.caption}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 896px"
+                            className="object-contain"
+                            priority={i === 0}
+                          />
+                        )}
                       </div>
                       <figcaption className="flex items-start gap-3 px-1">
                         <span className="font-mono text-[11px] text-[color:var(--color-accent)] mt-[2px]">
@@ -265,6 +276,11 @@ export default async function ProjectPage({ params }: PageProps) {
                         </span>
                         <span className="text-[14px] text-[color:var(--color-text-muted)] text-pretty leading-relaxed">
                           {shot.caption}
+                          {shot.type === "video" && (
+                            <span className="ml-2 font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-text-dim)]">
+                              · video
+                            </span>
+                          )}
                         </span>
                       </figcaption>
                     </figure>
