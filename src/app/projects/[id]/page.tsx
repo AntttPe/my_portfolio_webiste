@@ -163,6 +163,7 @@ export default async function ProjectPage({ params }: PageProps) {
             </div>
           </section>
 
+          {!project.versions && (
           <section className="mb-16">
             <h2 className="font-display text-2xl md:text-3xl font-medium tracking-tight text-[color:var(--color-text)] mb-2">
               {copy.heading}
@@ -308,6 +309,154 @@ export default async function ProjectPage({ params }: PageProps) {
                 </div>
               )}
           </section>
+          )}
+
+          {project.versions && project.versions.length > 0 && (
+            <section className="mb-16">
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.15em] text-[color:var(--color-text-dim)] mb-4">
+                Versions
+              </h2>
+              <p className="text-[color:var(--color-text-muted)] text-[15px] mb-6 text-pretty">
+                Two iterations preserved side by side - the legacy attempt and the working rewrite.
+              </p>
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                {project.versions.map((v, idx) => (
+                  <article
+                    key={idx}
+                    className="rounded-xl border border-[color:var(--color-border)] bg-[color:var(--color-bg-elevated)] p-6 md:p-7 flex flex-col gap-5"
+                  >
+                    <header className="flex items-start justify-between gap-3">
+                      <div className="flex flex-col gap-1.5 min-w-0">
+                        <h3 className="font-display text-xl md:text-2xl font-medium tracking-tight text-[color:var(--color-text)]">
+                          {v.label}
+                        </h3>
+                        {v.tagline && (
+                          <p className="text-[13px] text-[color:var(--color-text-muted)] text-pretty leading-relaxed">
+                            {v.tagline}
+                          </p>
+                        )}
+                      </div>
+                      {v.badge && (
+                        <span className="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-1 rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text-muted)] shrink-0">
+                          {v.badge}
+                        </span>
+                      )}
+                    </header>
+
+                    <p className="text-[13.5px] text-[color:var(--color-text-muted)] leading-relaxed text-pretty">
+                      {v.description}
+                    </p>
+
+                    {v.highlights.length > 0 && (
+                      <div>
+                        <h4 className="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-text-dim)] mb-2.5">
+                          Highlights
+                        </h4>
+                        <ul className="flex flex-col gap-2">
+                          {v.highlights.map((h) => (
+                            <li
+                              key={h}
+                              className="flex items-start gap-2.5 text-[13px] text-[color:var(--color-text-muted)]"
+                            >
+                              <span
+                                aria-hidden="true"
+                                className="mt-[6px] h-[4px] w-[4px] rounded-full bg-[color:var(--color-accent)] shrink-0"
+                              />
+                              <span className="text-pretty leading-relaxed">
+                                {h}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {v.tech.length > 0 && (
+                      <div>
+                        <h4 className="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-text-dim)] mb-2.5">
+                          Stack
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {v.tech.map((t) => (
+                            <span
+                              key={t}
+                              className="font-mono text-[11px] px-2 py-1 rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text-muted)]"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {v.statusLabel && (
+                      <div>
+                        <h4 className="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-text-dim)] mb-1.5">
+                          Status
+                        </h4>
+                        <p className="text-[13px] text-[color:var(--color-text)]">
+                          {v.statusLabel}
+                        </p>
+                      </div>
+                    )}
+
+                    {v.screenshots && v.screenshots.length > 0 ? (
+                      <div>
+                        <h4 className="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-text-dim)] mb-2.5">
+                          Screenshots
+                        </h4>
+                        <ol className="flex flex-col gap-4">
+                          {v.screenshots.map((shot, i) => (
+                            <li key={shot.src}>
+                              <figure className="flex flex-col gap-2">
+                                <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-[color:var(--color-border)] bg-[color:var(--color-bg)]">
+                                  {shot.type === "video" ? (
+                                    <video
+                                      src={shot.src}
+                                      poster={shot.poster}
+                                      controls
+                                      preload="metadata"
+                                      playsInline
+                                      className="absolute inset-0 h-full w-full object-contain bg-black"
+                                    />
+                                  ) : (
+                                    <Image
+                                      src={shot.src}
+                                      alt={shot.caption}
+                                      fill
+                                      sizes="(max-width: 768px) 100vw, 440px"
+                                      className="object-contain"
+                                    />
+                                  )}
+                                </div>
+                                <figcaption className="flex items-start gap-2 px-1">
+                                  <span className="font-mono text-[10px] text-[color:var(--color-accent)] mt-[2px]">
+                                    {String(i + 1).padStart(2, "0")}
+                                  </span>
+                                  <span className="text-[12px] text-[color:var(--color-text-muted)] text-pretty leading-relaxed">
+                                    {shot.caption}
+                                  </span>
+                                </figcaption>
+                              </figure>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    ) : (
+                      <div className="rounded-lg border border-dashed border-[color:var(--color-border)] p-6 bg-[color:var(--color-bg)] text-center">
+                        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-text-dim)] mb-1.5">
+                          Screenshots coming soon
+                        </div>
+                        <p className="text-[12px] text-[color:var(--color-text-muted)] text-pretty">
+                          Captures from the current build are being prepared.
+                        </p>
+                      </div>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </main>
       <Footer />

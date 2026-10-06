@@ -43,3 +43,9 @@ next-env.d.ts
 # AI agent guidance (local only)
 AGENTS.md
 CLAUDE.md
+
+# Claude Code local settings & agent guidance (never commit)
+.claude/
+
+# JetBrains IDE
+.idea/

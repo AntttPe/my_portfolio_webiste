@@ -22,6 +22,17 @@ export interface ProjectDocument {
   description?: string;
 }
 
+export interface ProjectVersion {
+  label: string;
+  badge?: string;
+  tagline?: string;
+  description: string;
+  highlights: string[];
+  tech: string[];
+  statusLabel?: string;
+  screenshots?: ProjectScreenshot[];
+}
+
 export interface Project {
   id: string;
   index: string;
@@ -40,6 +51,7 @@ export interface Project {
   media?: ProjectMedia;
   screenshots?: ProjectScreenshot[];
   documents?: ProjectDocument[];
+  versions?: ProjectVersion[];
 }
 
 export const projects: Project[] = [
@@ -113,73 +125,120 @@ export const projects: Project[] = [
   {
     id: "dental-cad",
     index: "02",
-    title: "Dental CAD & AI Segmentation",
-    subtitle: "C++ aligner generator + PyTorch tooth segmentation model",
+    title: "Dental Aligner Generator",
+    subtitle:
+      "Two approaches to one problem - a naive C++ offset that failed, a Python SDF pipeline that solved it",
     description:
-      "Two interconnected components aimed at an end-to-end pipeline from raw 3D scan to generated aligner geometry. A C++ module procedurally generates dental overlay meshes from tooth models. A PyTorch neural network is being trained to segment teeth from 3D scans and feed clean geometry into the generator.",
+      "An end-to-end tool that turns an intraoral STL scan into a print-ready orthodontic aligner mesh for direct-print SLA. The first version went into C++ and it failed - but the problem was the algorithm, not the language. Naive surface offsetting self-intersects in concave regions between the teeth and fills the embrasures (interdental gaps). I rewrote it in Python around a signed distance field, where geometry cannot self-intersect by construction and interdental gaps are bridged naturally by morphological closing. Both versions are preserved here side by side - the C++ prototype as an engineering record, the Python pipeline as the current working build.",
     highlights: [
-      "Modern C++17 - custom geometry algorithms, STL file processing",
-      "Procedural aligner mesh generation (~80% complete)",
-      "PyTorch segmentation model trained on dental mesh data",
-      "Target pipeline: raw 3D scan → segmented teeth → generated aligner",
+      "End-to-end pipeline from intraoral STL scan to print-ready aligner mesh, with auto-generated print supports",
+      "Two iterations preserved: legacy C++ + PyTorch attempt; working Python SDF rewrite that supersedes it",
+      "Core engineering insight: failures of geometry are usually algorithmic, not language-level",
     ],
     tech: [
-      "C++17",
-      "STL processing",
-      "Python",
-      "PyTorch",
-      "NumPy",
-      "CMake",
+      "Python 3.10+",
+      "NumPy / SciPy",
+      "trimesh",
+      "scikit-image",
+      "PySide6",
+      "C++17 (legacy)",
+      "PyTorch (legacy)",
     ],
-    wow: "End-to-end pipeline from raw 3D scan to printable aligner - tooth segmentation in PyTorch, mesh generation in modern C++.",
+    wow: "Diagnosed a C++ failure as algorithmic rather than language-level - rewrote the offset around a signed distance field, where self-intersection becomes structurally impossible.",
     status: "active",
-    statusLabel: "Active development - private repo",
+    statusLabel: "Python pipeline working - C++ legacy preserved as reference",
     year: "2025 - present",
     media: {
-      ctaLabel: "View screenshots",
+      ctaLabel: "View both versions",
       href: "/projects/dental-cad",
       kind: "screenshots",
     },
-    screenshots: [
+    versions: [
       {
-        src: "/projects/dental-cad/01-first-segmentation-attempts.jpg",
-        caption: "First segmentation attempts on raw 3D dental scans",
+        label: "C++ Legacy",
+        badge: "Superseded",
+        tagline: "First attempt - C++17 generator + PyTorch tooth segmentation",
+        description:
+          "Original architecture: a C++ module procedurally generating dental overlay meshes from segmented tooth models, plus a PyTorch network trained to segment teeth from raw scans. The C++ aligner generation hit a wall - naive surface offsetting self-intersects in concave regions between the teeth and fills the embrasures. After multiple attempts at patching the result, I diagnosed the issue as algorithmic - the wrong approach to the offset problem entirely. Preserved here as an engineering record and as the lesson that drove the Python rewrite.",
+        highlights: [
+          "Modern C++17 - custom geometry algorithms, STL file processing",
+          "Procedural aligner mesh generation, ~80% complete before the algorithmic limits became clear",
+          "PyTorch segmentation model trained on dental mesh data, with progressive noise reduction",
+          "Target pipeline: raw 3D scan -> segmented teeth -> generated aligner",
+          "Engineering record of where naive vertex-normal offsetting fails: self-intersections and embrasure-fill",
+        ],
+        tech: ["C++17", "STL processing", "Python", "PyTorch", "NumPy", "CMake"],
+        statusLabel: "Superseded by Python rewrite",
+        screenshots: [
+          {
+            src: "/projects/dental-cad/01-first-segmentation-attempts.jpg",
+            caption: "First segmentation attempts on raw 3D dental scans",
+          },
+          {
+            src: "/projects/dental-cad/02-noisy-segmentation-output.jpg",
+            caption: "Early output - heavy noise, indistinct tooth boundaries",
+          },
+          {
+            src: "/projects/dental-cad/03-noise-reduction-iterations.jpg",
+            caption: "Iterating on the segmentation pipeline - progressive noise reduction",
+          },
+          {
+            src: "/projects/dental-cad/04-segmented-teeth.jpg",
+            caption: "Segmentation output - individual teeth identified and color-coded",
+          },
+          {
+            src: "/projects/dental-cad/05-clean-teeth-model.jpg",
+            caption: "Clean teeth model - the input the C++ aligner generator worked on",
+          },
+          {
+            src: "/projects/dental-cad/06-first-voxel-aligner.jpg",
+            caption: "First voxel-based aligner geometry - early generation attempt",
+          },
+          {
+            src: "/projects/dental-cad/07-contact-surface-algorithm.jpg",
+            caption: "Algorithm for computing the aligner-tooth contact surface",
+          },
+          {
+            src: "/projects/dental-cad/08-failed-aligner-closure.jpg",
+            caption: "Failure mode - broken surface closure on the generated aligner",
+          },
+          {
+            src: "/projects/dental-cad/09-cross-section-clearance-check.jpg",
+            caption: "Cross-section analysis - verifying the aligner does not intersect or sit too close to the teeth",
+          },
+          {
+            src: "/projects/dental-cad/10-successful-aligner.jpg",
+            caption: "Successful aligner over teeth - anatomically correct fit from outside",
+          },
+        ],
       },
       {
-        src: "/projects/dental-cad/02-noisy-segmentation-output.jpg",
-        caption: "Early output - heavy noise, indistinct tooth boundaries",
-      },
-      {
-        src: "/projects/dental-cad/03-noise-reduction-iterations.jpg",
-        caption: "Iterating on the segmentation pipeline - progressive noise reduction",
-      },
-      {
-        src: "/projects/dental-cad/04-segmented-teeth.jpg",
-        caption: "Segmentation output - individual teeth identified and color-coded",
-      },
-      {
-        src: "/projects/dental-cad/05-clean-teeth-model.jpg",
-        caption: "Clean teeth model - segmentation output processed for use by the C++ aligner generator",
-      },
-      {
-        src: "/projects/dental-cad/06-first-voxel-aligner.jpg",
-        caption: "First voxel-based aligner geometry - early generation attempt",
-      },
-      {
-        src: "/projects/dental-cad/07-contact-surface-algorithm.jpg",
-        caption: "Algorithm for computing the aligner-tooth contact surface",
-      },
-      {
-        src: "/projects/dental-cad/08-failed-aligner-closure.jpg",
-        caption: "Failure mode - broken surface closure on the generated aligner",
-      },
-      {
-        src: "/projects/dental-cad/09-cross-section-clearance-check.jpg",
-        caption: "Cross-section analysis - verifying the aligner does not intersect or sit too close to the teeth",
-      },
-      {
-        src: "/projects/dental-cad/10-successful-aligner.jpg",
-        caption: "Successful aligner over teeth - anatomically correct fit from outside",
+        label: "Python Pipeline",
+        badge: "Current",
+        tagline: "Working: Python SDF pipeline with auto-generated print supports",
+        description:
+          "End-to-end Python tool: STL intraoral scan -> manual adhesion-surface selection -> SDF/voxel pipeline -> aligner mesh + research-driven print supports -> print-ready multi-solid STL. The pipeline is built around a signed distance field instead of vertex-normal offsetting, which makes self-intersection structurally impossible and lets morphological closing bridge embrasures naturally. Manual selection (with geodesic shortest-path + live-wire snap to the gingival margin) was chosen deliberately over ML segmentation - simplicity, determinism, and clinician control over the result.",
+        highlights: [
+          "SDF / voxel pipeline: voxelize -> morphological closing -> Euclidean Distance Transform -> field assembly -> marching cubes -> Taubin smoothing",
+          "Owner-based proximity trim - each voxel belongs to the aligner only if its nearest surface is part of the selection, giving a natural gingival cut without tuning a radius",
+          "Hard-min wall + smooth-min only on the cut edges - exact thickness with rounded trim edge",
+          "EDT instead of per-voxel KDTree queries - one stage cut from ~116 s to ~2 s",
+          "Interactive selection - geodesic shortest-path Dijkstra + live-wire snap to the gingival margin via per-edge dihedral curvature",
+          "Research-driven print supports on the rim (never on the fit surface) - separates raft contact area from raft thickness for ~40% less resin without losing adhesion",
+          "Watertight + manifold multi-solid STL straight to PreForm - no boolean-union failure modes",
+        ],
+        tech: [
+          "Python 3.10+",
+          "NumPy",
+          "SciPy",
+          "scikit-image",
+          "trimesh",
+          "manifold3d",
+          "PySide6",
+          "PyVista / VTK",
+        ],
+        statusLabel: "Working pipeline",
+        screenshots: [],
       },
     ],
   },
