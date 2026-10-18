@@ -447,88 +447,11 @@ function NowBuildingCard({ project }: { project: Project }) {
   );
 }
 
-function ClientSitesCard({ project }: { project: Project }) {
-  return (
-    <article
-      className="grid md:grid-cols-12 border border-[color:var(--color-border)] rounded-xl bg-[color:var(--color-bg-elevated)] overflow-hidden"
-      aria-labelledby={`${project.id}-title`}
-    >
-      <div className="md:col-span-5 p-6 md:p-7 flex flex-col gap-4 md:border-r border-[color:var(--color-border)]">
-        <div className="flex items-center justify-between gap-2">
-          <span className="font-mono text-[11px] text-[color:var(--color-text-dim)] tracking-widest">
-            PROJECT / {project.index}
-          </span>
-          <StatusChip project={project} />
-        </div>
-        <div className="flex flex-col gap-2">
-          <h3
-            id={`${project.id}-title`}
-            className="font-display text-xl md:text-2xl font-medium tracking-tight text-[color:var(--color-text)]"
-          >
-            {project.title}
-          </h3>
-          <p className="text-[14px] leading-relaxed text-[color:var(--color-text-muted)] text-pretty">
-            {project.subtitle}. {project.description}
-          </p>
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {project.tech.map((t) => (
-            <span
-              key={t}
-              className="font-mono text-[10.5px] px-1.5 py-0.5 rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] text-[color:var(--color-text-muted)]"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <ul className="md:col-span-7 flex flex-col divide-y divide-[color:var(--color-border)] border-t md:border-t-0 border-[color:var(--color-border)]">
-        {(project.links ?? []).map((link) => (
-          <li key={link.href} className="flex-1">
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group h-full flex items-center justify-between gap-4 px-6 md:px-7 py-5 hover:bg-[color:var(--color-surface)] transition-colors"
-            >
-              <span className="flex flex-col gap-1 min-w-0">
-                <span className="text-[16px] text-[color:var(--color-text)] group-hover:text-[color:var(--color-accent)] transition-colors truncate">
-                  {link.label}
-                </span>
-                <span className="font-mono text-[11px] text-[color:var(--color-text-dim)]">
-                  {link.note}
-                </span>
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="shrink-0 text-[color:var(--color-text-dim)] group-hover:text-[color:var(--color-accent)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
-                aria-hidden="true"
-              >
-                <path d="M7 17L17 7M7 7h10v10" />
-              </svg>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </article>
-  );
-}
-
 export default function Projects() {
   const sorted = [...projects].sort((a, b) => a.index.localeCompare(b.index));
   const lead = sorted.filter((p) => p.placement === "lead");
   const pair = sorted.filter((p) => p.placement === "pair");
   const now = sorted.filter((p) => p.placement === "now");
-  const clients = sorted.filter((p) => p.placement === "clients");
   const more = sorted.filter((p) => p.placement === "more");
 
   return (
@@ -570,10 +493,6 @@ export default function Projects() {
               ))}
             </div>
           )}
-
-          {clients.map((p) => (
-            <ClientSitesCard key={p.id} project={p} />
-          ))}
 
           {more.length > 0 && (
             <details className="group/more">

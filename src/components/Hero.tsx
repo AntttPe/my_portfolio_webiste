@@ -52,15 +52,16 @@ export default function Hero() {
             </Link>
 
             <p className="max-w-2xl text-lg md:text-xl text-[color:var(--color-text-muted)] text-pretty leading-relaxed">
-              ICT engineering student at{" "}
-              <span className="text-[color:var(--color-text)]">AGH Kraków</span>.
-              Just back from an internship at{" "}
+              Hi! I study ICT engineering at{" "}
+              <span className="text-[color:var(--color-text)]">AGH Kraków</span>,
+              and this is where I keep the things I&rsquo;ve built. Over the
+              summer I interned at{" "}
               <span className="text-[color:var(--color-text)]">Relu BV</span> in
-              Leuven, Belgium - production ML pipelines on 3D medical imaging, written
+              Leuven, Belgium, working on machine learning for 3D dental imaging
               in{" "}
               <span className="text-[color:var(--color-text)]">Python</span>.
-              The rest of the stack: backend platforms in Java and Spring Boot,
-              embedded firmware in C++, networking in between.
+              Outside of that I build backends and embedded software - have a
+              look around.
             </p>
           </div>
 

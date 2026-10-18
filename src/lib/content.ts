@@ -33,13 +33,7 @@ export interface ProjectVersion {
   screenshots?: ProjectScreenshot[];
 }
 
-export type ProjectPlacement = "lead" | "pair" | "now" | "clients" | "more";
-
-export interface ProjectLink {
-  label: string;
-  href: string;
-  note: string;
-}
+export type ProjectPlacement = "lead" | "pair" | "now" | "more";
 
 export interface Project {
   id: string;
@@ -58,7 +52,6 @@ export interface Project {
   year: string;
   placement: ProjectPlacement;
   pitch?: string;
-  links?: ProjectLink[];
   media?: ProjectMedia;
   screenshots?: ProjectScreenshot[];
   documents?: ProjectDocument[];
@@ -261,7 +254,7 @@ export const projects: Project[] = [
   },
   {
     id: "satellite-sim",
-    index: "07",
+    index: "06",
     title: "Satellite Simulator",
     subtitle:
       "Multi-layer LEO satellite simulator - onboard computer in C++ / FreeRTOS, FastAPI bridge, and a planned Mission Control dashboard",
@@ -297,8 +290,8 @@ export const projects: Project[] = [
       "TCP/IP",
     ],
     wow: "A real RTOS kernel - the same technology that runs on actual CubeSats - handling sensor fusion, orbital mechanics, optical-link physics and watchdog supervision, all built from scratch.",
-    status: "in-progress",
-    statusLabel: "C++ layer complete - Python bridge in progress",
+    status: "complete",
+    statusLabel: "Complete",
     year: "2025",
     placement: "more",
     screenshots: [
@@ -347,7 +340,7 @@ export const projects: Project[] = [
   },
   {
     id: "rocketsim",
-    index: "06",
+    index: "05",
     title: "RocketSim",
     subtitle:
       "6-DoF rocket landing simulator with thrust-vector control and a neural landing controller trained with PPO",
@@ -363,7 +356,7 @@ export const projects: Project[] = [
   },
   {
     id: "rocket-test-stand",
-    index: "08",
+    index: "07",
     title: "Rocket Engine Test Stand",
     subtitle:
       "Physical thrust measurement rig for model rocket motors - Teensy 4.1, 10 kg load cell, automated electric ignition, post-burn flight modeling",
@@ -427,12 +420,12 @@ export const projects: Project[] = [
   },
   {
     id: "homelab",
-    index: "09",
+    index: "08",
     title: "Homelab - Design & Cost Estimate",
     subtitle:
-      "Network architecture, hardware shortlist, and cost estimate for a self-hosted private cloud / surveillance / Smart Home stack - physical build planned for summer 2026",
+      "Network architecture, hardware shortlist, and cost estimate for a self-hosted private cloud / surveillance / Smart Home stack",
     description:
-      "Currently a planning project, not a finished system. The design stage is done: full network topology with VLAN segmentation, structured-cabling plan, bill of materials, and cost estimate. Physical assembly is scheduled for summer break 2026 - built incrementally in free time alongside studies. The target architecture: a Proxmox VE hypervisor on a 20W mini-PC running isolated services for AI video analytics (Frigate + Google Coral TPU), private cloud (Nextcloud), Smart Home (Home Assistant integrated with existing Fibaro hardware), DNS-level ad-blocking (AdGuard), and zero-port-forward remote access (Tailscale / WireGuard). All data stays on-premise.",
+      "Currently a planning project, not a finished system. The design stage is done: full network topology with VLAN segmentation, structured-cabling plan, bill of materials, and cost estimate. The target architecture: a Proxmox VE hypervisor on a 20W mini-PC running isolated services for AI video analytics (Frigate + Google Coral TPU), private cloud (Nextcloud), Smart Home (Home Assistant integrated with existing Fibaro hardware), DNS-level ad-blocking (AdGuard), and zero-port-forward remote access (Tailscale / WireGuard). All data stays on-premise.",
     highlights: [
       "Proxmox VE bare-metal hypervisor - every service runs as an isolated LXC / KVM, zero-downtime updates",
       "Frigate NVR + Google Coral USB TPU - 4 TOPS local inference at ~2W, real-time human/vehicle classification across all cameras, no cloud round-trip",
@@ -457,9 +450,9 @@ export const projects: Project[] = [
       "Docker",
     ],
     wow: "Designed end-to-end before any hardware is bought - topology, segmentation, hardware shortlist, and cost estimate locked in.",
-    status: "in-progress",
-    statusLabel: "Planning stage · physical build summer 2026",
-    year: "2026 - planning",
+    status: "complete",
+    statusLabel: "Design complete",
+    year: "2026",
     placement: "more",
     documents: [
       {
@@ -469,28 +462,6 @@ export const projects: Project[] = [
         lang: "Polish",
         description:
           "Full technical proposal: network topology, VLAN segmentation, hardware shortlist, bill of materials, and cost estimate.",
-      },
-    ],
-  },
-  {
-    id: "web",
-    index: "05",
-    title: "Client Websites",
-    subtitle: "Sites I designed, built and deployed for real clients, still live",
-    description:
-      "Built solo, from the first conversation with the client to deployment.",
-    highlights: [],
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
-    wow: "",
-    status: "production",
-    statusLabel: "Live",
-    year: "2025",
-    placement: "clients",
-    links: [
-      {
-        label: "apmdental.pl",
-        href: "https://www.apmdental.pl",
-        note: "Dental practice",
       },
     ],
   },
@@ -515,7 +486,7 @@ export interface ExperienceEntry {
 export const experience: ExperienceEntry[] = [
   {
     id: "relu",
-    role: "Software Engineer Intern",
+    role: "Software and ML Engineer Intern",
     company: "Relu BV",
     companyUrl: "https://relu.ai",
     location: "Leuven, Belgium",
