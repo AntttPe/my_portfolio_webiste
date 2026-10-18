@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#about", label: "About", num: "01" },
-  { href: "#projects", label: "Projects", num: "02" },
-  { href: "#stack", label: "Stack", num: "03" },
-  { href: "#contact", label: "Contact", num: "04" },
+  { href: "/#about", label: "About", num: "01" },
+  { href: "/#experience", label: "Experience", num: "02" },
+  { href: "/#projects", label: "Projects", num: "03" },
+  { href: "/#stack", label: "Stack", num: "04" },
+  { href: "/#contact", label: "Contact", num: "05" },
 ];
 
 export default function Nav() {
@@ -31,8 +33,8 @@ export default function Nav() {
         aria-label="Primary"
         className="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between"
       >
-        <a
-          href="#top"
+        <Link
+          href="/"
           className="group flex items-center gap-2 font-mono text-[13px] tracking-tight text-[color:var(--color-text)]"
         >
           <span className="text-[color:var(--color-accent)]">●</span>
@@ -41,7 +43,7 @@ export default function Nav() {
           </span>
           <span className="text-[color:var(--color-text-dim)]">/</span>
           <span>pietraszewski</span>
-        </a>
+        </Link>
 
         <ul className="hidden md:flex items-center gap-1">
           {links.map((link) => (
@@ -59,21 +61,21 @@ export default function Nav() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="hidden md:inline-flex items-center gap-2 font-mono text-[12px] px-3 py-1.5 rounded-md border border-[color:var(--color-border)] hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)] transition-colors cursor-pointer"
         >
           <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)] pulse-dot" />
           available
-        </a>
+        </Link>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="md:hidden inline-flex items-center gap-2 font-mono text-[12px] text-[color:var(--color-text-muted)] cursor-pointer"
         >
           <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)] pulse-dot" />
           contact
-        </a>
+        </Link>
       </nav>
     </header>
   );

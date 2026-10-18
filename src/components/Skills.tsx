@@ -9,7 +9,7 @@ export default function Skills() {
       className="relative py-16 md:py-20 scroll-mt-20"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <SectionLabel num="03" title="Stack" kicker="Tools I reach for" />
+        <SectionLabel num="04" title="Stack" kicker="Tools I reach for" />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[color:var(--color-border)] border border-[color:var(--color-border)] rounded-xl overflow-hidden">
           {skillGroups.map((group) => (

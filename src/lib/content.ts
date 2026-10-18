@@ -33,6 +33,14 @@ export interface ProjectVersion {
   screenshots?: ProjectScreenshot[];
 }
 
+export type ProjectPlacement = "lead" | "pair" | "now" | "clients" | "more";
+
+export interface ProjectLink {
+  label: string;
+  href: string;
+  note: string;
+}
+
 export interface Project {
   id: string;
   index: string;
@@ -48,6 +56,9 @@ export interface Project {
   repo?: string;
   href?: string;
   year: string;
+  placement: ProjectPlacement;
+  pitch?: string;
+  links?: ProjectLink[];
   media?: ProjectMedia;
   screenshots?: ProjectScreenshot[];
   documents?: ProjectDocument[];
@@ -57,9 +68,11 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "nexora",
-    index: "01",
+    index: "03",
     title: "Nexora",
     subtitle: "Full-stack SaaS replacing paper-based dental lab workflows",
+    pitch:
+      "A web platform for dental labs. Clinics send orders with STL files; the lab handles production, 3D printing through the Formlabs API, shipping and invoicing in one place.",
     description:
       "A web platform connecting dental clinics with prosthetic laboratories. Dentists submit digital orders with STL files, labs manage production, print queues, shipments, and invoicing - all in one system. **Formlabs PreForm API integration** bridges digital design and physical manufacturing: STL files sent to physical 3D printers, with print status polled in real time.",
     highlights: [
@@ -87,9 +100,10 @@ export const projects: Project[] = [
       "Docker Compose",
     ],
     wow: "A dentist uploads an STL file and Nexora manages everything through to 3D printing and delivery.",
-    status: "production",
-    statusLabel: "Production - private repo",
-    year: "2024 - 2026",
+    status: "complete",
+    statusLabel: "Complete - learning project, private repo",
+    year: "Feb - May 2026",
+    placement: "pair",
     media: {
       ctaLabel: "View usage demo",
       href: "/projects/nexora",
@@ -128,6 +142,8 @@ export const projects: Project[] = [
     title: "Dental Aligner Generator",
     subtitle:
       "Two approaches to one problem - a naive C++ offset that failed, a Python SDF pipeline that solved it",
+    pitch:
+      "Turns an intraoral scan into a print-ready aligner mesh. The first version, in C++, broke on concave geometry between the teeth. The Python rewrite builds the shell from a signed distance field, so it can't self-intersect.",
     description:
       "An end-to-end tool that turns an intraoral STL scan into a print-ready orthodontic aligner mesh for direct-print SLA. The first version went into C++ and it failed - but the problem was the algorithm, not the language. Naive surface offsetting self-intersects in concave regions between the teeth and fills the embrasures (interdental gaps). I rewrote it in Python around a signed distance field, where geometry cannot self-intersect by construction and interdental gaps are bridged naturally by morphological closing. Both versions are preserved here side by side - the C++ prototype as an engineering record, the Python pipeline as the current working build.",
     highlights: [
@@ -145,9 +161,10 @@ export const projects: Project[] = [
       "PyTorch (legacy)",
     ],
     wow: "Diagnosed a C++ failure as algorithmic rather than language-level - rewrote the offset around a signed distance field, where self-intersection becomes structurally impossible.",
-    status: "active",
-    statusLabel: "Python pipeline working - C++ legacy preserved as reference",
-    year: "2025 - present",
+    status: "complete",
+    statusLabel: "Complete - learning project",
+    year: "Jan - Jun 2026",
+    placement: "pair",
     media: {
       ctaLabel: "View both versions",
       href: "/projects/dental-cad",
@@ -244,7 +261,7 @@ export const projects: Project[] = [
   },
   {
     id: "satellite-sim",
-    index: "03",
+    index: "07",
     title: "Satellite Simulator",
     subtitle:
       "Multi-layer LEO satellite simulator - onboard computer in C++ / FreeRTOS, FastAPI bridge, and a planned Mission Control dashboard",
@@ -282,12 +299,8 @@ export const projects: Project[] = [
     wow: "A real RTOS kernel - the same technology that runs on actual CubeSats - handling sensor fusion, orbital mechanics, optical-link physics and watchdog supervision, all built from scratch.",
     status: "in-progress",
     statusLabel: "C++ layer complete - Python bridge in progress",
-    year: "2025 - present",
-    media: {
-      ctaLabel: "View screenshots",
-      href: "/projects/satellite-sim",
-      kind: "screenshots",
-    },
+    year: "2025",
+    placement: "more",
     screenshots: [
       {
         src: "/projects/satellite-sim/mission_control_panel.png",
@@ -296,8 +309,61 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "rocket-test-stand",
+    id: "ortho-planning",
     index: "04",
+    title: "Orthodontic Planning Tool",
+    subtitle: "A pipeline of tools to help orthodontists plan aligner treatment",
+    description:
+      "What I'm mostly working on now, to learn and to dig deeper into the field. It starts with cephalometric analysis - an AI model that places the landmarks and adapts to how a given orthodontist prefers to place them - and runs through to designing attachments for aligner treatment.",
+    highlights: [],
+    tech: ["Python", "PyTorch", "NumPy", "3D geometry"],
+    wow: "",
+    status: "in-progress",
+    statusLabel: "In progress",
+    year: "2026 - present",
+    placement: "now",
+  },
+  {
+    id: "whatsapp-shift-tracker",
+    index: "01",
+    title: "WhatsApp Shift Tracker",
+    subtitle:
+      "Time tracking for a Belgian cleaning company with about 40 staff - employees clock in and out over WhatsApp",
+    description:
+      "Built to the owner's requirements. Staff send START or STOP on WhatsApp, so there is no new app to learn; the owner gets an admin panel with timelines, corrections and Excel reports. It runs on my VPS and is in its first tests with the client, with full rollout planned for December 2026.",
+    highlights: [
+      "Clock in and out by WhatsApp message - nothing to install or learn for the staff",
+      "Admin panel with timelines, manual corrections and Excel reports; every change is audited",
+      "Append-only event log enforced by PostgreSQL triggers, designed for 5-year labour-law record retention",
+      "One Docker image on a VPS, with separate processes for the webhook, panel, scheduler and migrations",
+      "2FA, CSRF and CSP protection; 213 automated tests",
+    ],
+    tech: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "HTMX", "Docker Compose", "WhatsApp Business API"],
+    wow: "",
+    status: "active",
+    statusLabel: "Client testing · full rollout Dec 2026",
+    year: "2026 - present",
+    placement: "lead",
+  },
+  {
+    id: "rocketsim",
+    index: "06",
+    title: "RocketSim",
+    subtitle:
+      "6-DoF rocket landing simulator with thrust-vector control and a neural landing controller trained with PPO",
+    description:
+      "Early-stage project. Variable-mass rocket dynamics with swappable MuJoCo and Bullet backends, and a landing controller trained with reinforcement learning under randomized wind, sensor noise, actuator delay and mass.",
+    highlights: [],
+    tech: ["Python", "PyTorch", "MuJoCo", "PyBullet", "Gymnasium", "Stable-Baselines3"],
+    wow: "",
+    status: "in-progress",
+    statusLabel: "Early stage",
+    year: "2026 - present",
+    placement: "more",
+  },
+  {
+    id: "rocket-test-stand",
+    index: "08",
     title: "Rocket Engine Test Stand",
     subtitle:
       "Physical thrust measurement rig for model rocket motors - Teensy 4.1, 10 kg load cell, automated electric ignition, post-burn flight modeling",
@@ -324,6 +390,7 @@ export const projects: Project[] = [
     status: "complete",
     statusLabel: "Static test campaign complete",
     year: "2025",
+    placement: "more",
     media: {
       ctaLabel: "View test footage & data",
       href: "/projects/rocket-test-stand",
@@ -360,7 +427,7 @@ export const projects: Project[] = [
   },
   {
     id: "homelab",
-    index: "05",
+    index: "09",
     title: "Homelab - Design & Cost Estimate",
     subtitle:
       "Network architecture, hardware shortlist, and cost estimate for a self-hosted private cloud / surveillance / Smart Home stack - physical build planned for summer 2026",
@@ -393,11 +460,7 @@ export const projects: Project[] = [
     status: "in-progress",
     statusLabel: "Planning stage · physical build summer 2026",
     year: "2026 - planning",
-    media: {
-      ctaLabel: "View design & cost estimate",
-      href: "/projects/homelab",
-      kind: "documentation",
-    },
+    placement: "more",
     documents: [
       {
         title: "Oferta Techniczna - Prywatny Ekosystem Cyfrowy i Inteligentny Monitoring AI",
@@ -411,27 +474,80 @@ export const projects: Project[] = [
   },
   {
     id: "web",
-    index: "06",
-    title: "Web Work",
-    subtitle: "Production frontend, when a project calls for one",
+    index: "05",
+    title: "Client Websites",
+    subtitle: "Sites I designed, built and deployed for real clients, still live",
     description:
-      "Frontend is a tool I reach for happily - but the work I want to be doing sits a few layers below the UI: backend, embedded, networks. Listed here for context.",
-    highlights: [
-      "apmdental.pl - production site for a dental practice, built and deployed solo on Next.js / Vercel",
-    ],
+      "Built solo, from the first conversation with the client to deployment.",
+    highlights: [],
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     wow: "",
-    status: "complete",
-    statusLabel: "Live in production",
+    status: "production",
+    statusLabel: "Live",
     year: "2025",
-    media: {
-      ctaLabel: "Visit apmdental.pl",
-      href: "https://www.apmdental.pl",
-      external: true,
-      kind: "external",
-    },
+    placement: "clients",
+    links: [
+      {
+        label: "apmdental.pl",
+        href: "https://www.apmdental.pl",
+        note: "Dental practice",
+      },
+    ],
   },
 ];
+
+export interface ExperienceEntry {
+  id: string;
+  role: string;
+  company: string;
+  companyUrl?: string;
+  location: string;
+  team?: string;
+  start: string;
+  end: string;
+  duration?: string;
+  current?: boolean;
+  summary: string;
+  bullets: string[];
+  tech: string[];
+}
+
+export const experience: ExperienceEntry[] = [
+  {
+    id: "relu",
+    role: "Software Engineer Intern",
+    company: "Relu BV",
+    companyUrl: "https://relu.ai",
+    location: "Leuven, Belgium",
+    team: "AI & Software Engineering team",
+    start: "Jul 2026",
+    end: "Sep 2026",
+    summary:
+      "Production ML for dental and orthodontic imaging. I retrained their 3D models through several iterations, built new models and algorithms into the pipeline, and fixed what was holding it back - in the same system their paying customers rely on.",
+    bullets: [
+      "Retrained a production 3D segmentation model used by paying customers: data pipeline, architecture changes, cloud GPU training and evaluation against the existing baseline.",
+      "Worked out why one architecture variant would not learn: the target depended on the whole input, but patch-based training only ever sees part of it. Reframed the target so it could be learned locally, and the model converged.",
+      "Built a landmark-prediction module on a voxelised geometric representation, including its data pipeline, evaluation scripts and integration into the existing pipeline.",
+      "Fixed bugs in the preprocessing and training infrastructure, including stale cached data being silently reused and hardcoded paths.",
+    ],
+    tech: [
+      "Python",
+      "PyTorch",
+      "ONNX Runtime",
+      "NumPy",
+      "SciPy",
+      "Docker",
+      "Git",
+      "Linux",
+      "Cloud GPU training",
+    ],
+  },
+];
+
+export const resume = {
+  href: "/personal/Antoni_Pietraszewski_CV.pdf",
+  fileName: "Antoni_Pietraszewski_CV.pdf",
+};
 
 export interface SkillGroup {
   category: string;
@@ -442,12 +558,23 @@ export const skillGroups: SkillGroup[] = [
   {
     category: "Languages",
     items: [
+      { name: "Python", level: "core" },
       { name: "Java", level: "core" },
       { name: "TypeScript", level: "core" },
       { name: "C++17", level: "working" },
-      { name: "Python", level: "working" },
       { name: "SQL", level: "working" },
       { name: "Rust", level: "growing" },
+    ],
+  },
+  {
+    category: "ML & Scientific Python",
+    items: [
+      { name: "PyTorch", level: "core" },
+      { name: "NumPy", level: "core" },
+      { name: "SciPy", level: "working" },
+      { name: "ONNX Runtime", level: "working" },
+      { name: "3D mesh / voxel", level: "working" },
+      { name: "Cloud GPU training", level: "working" },
     ],
   },
   {
@@ -469,14 +596,15 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    category: "Infra & Self-hosting",
+    category: "Infra & Tooling",
     items: [
       { name: "PostgreSQL", level: "working" },
       { name: "Docker", level: "working" },
-      { name: "Proxmox VE", level: "growing" },
       { name: "Linux", level: "working" },
-      { name: "Tailscale / WireGuard", level: "growing" },
       { name: "Git", level: "core" },
+      { name: "Proxmox VE", level: "growing" },
+      { name: "Tailscale / WireGuard", level: "growing" },
+      { name: "Multi-agent AI coding", level: "working" },
     ],
   },
   {
@@ -490,13 +618,11 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    category: "Embedded & ML",
+    category: "Embedded",
     items: [
       { name: "FreeRTOS", level: "growing" },
       { name: "POSIX threading", level: "working" },
-      { name: "PyTorch", level: "growing" },
       { name: "Edge AI (Coral TPU)", level: "growing" },
-      { name: "STL / geometry", level: "working" },
     ],
   },
 ];
@@ -512,13 +638,13 @@ export const meta = {
   name: "Antek Pietraszewski",
   role: "ICT Engineering Student · Systems Builder",
   school: "AGH University of Science and Technology",
-  program: "Teleinformatyka (ICT) - 4th semester, BSc",
-  focus: "Networks, embedded, systems programming",
+  program: "ICT Engineering (Teleinformatyka), BSc - graduating February 2028",
+  focus: "Production ML pipelines, networks, embedded, systems programming",
   longTerm: "Software at the intersection of critical infrastructure - aerospace, medical, telecom",
 };
 
 export const aboutIntro =
-  "Fourth-semester ICT student at AGH Kraków. Building systems that have to hold up under pressure - both ends of the stack, both for clients and for myself.";
+  "Fifth-semester ICT student at AGH Kraków, graduating in February 2028. In summer 2026 I interned at Relu BV in Leuven, Belgium, working on production ML for 3D medical imaging, mostly in Python.";
 
 export interface AboutSection {
   label: string;
@@ -528,27 +654,31 @@ export interface AboutSection {
 export const aboutSections: AboutSection[] = [
   {
     label: "Learning",
-    body: "ICT Engineering (Teleinformatyka) at AGH Kraków, 4th semester. CCNA in progress.",
+    body: "ICT Engineering (Teleinformatyka) at AGH Kraków, 5th of 7 semesters. Working through the Cisco CCNA track alongside.",
+  },
+  {
+    label: "Work",
+    body: "Relu BV, summer 2026 - working on production ML pipelines for dental imaging: retraining models, building new ones, and fixing the infrastructure around them.",
   },
   {
     label: "Building",
-    body: "Nexora and Dental CAD on my own time - full-stack systems with real users behind them. Occasional production websites when someone asks for one.",
+    body: "For a real client: a shift-tracking system for a Belgian cleaning company with about 40 staff, built around the owner's requirements - staff clock in and out over WhatsApp. First tests with the client are running now, full rollout in December. On my own time: an orthodontic planning tool, which grew out of two finished learning projects - Nexora and the Dental Aligner Generator.",
   },
   {
     label: "Direction",
-    body: "Reliable, secure systems - networking, embedded, systems programming. Picking up Rust next, for the same reasons.",
+    body: "Systems that have to keep working - production ML, backend, networking, embedded.",
   },
   {
     label: "Off-screen",
-    body: "Physical training and endurance racing - competed in a few triathlons, including a full Ironman finish.",
+    body: "Endurance sport - a few triathlons, including a full-distance one (3.8 km swim, 180 km bike, 42 km run). Tennis and padel too - I love both, and they're a lot of fun to play.",
   },
 ];
 
 export const aboutPhoto = {
   enabled: true,
   src: "/personal/me-triathlon.jpg",
-  alt: "Antek at the finish line of an Ironman triathlon, holding the medal",
-  caption: "ironman finish",
+  alt: "Antek after finishing a full-distance triathlon, holding the medal",
+  caption: "full-distance triathlon finish",
 };
 
 export interface Credential {
@@ -573,7 +703,7 @@ export interface AboutStat {
 }
 
 export const aboutStats: AboutStat[] = [
-  { label: "Studies", value: "4th sem" },
-  { label: "CCNA", value: "2/3 done" },
+  { label: "Graduating", value: "Feb 2028" },
+  { label: "Last internship", value: "Relu '26" },
   { label: "Languages", value: "EN B2 · PL native" },
 ];

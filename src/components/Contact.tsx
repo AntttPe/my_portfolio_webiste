@@ -28,16 +28,17 @@ export default function Contact() {
       className="relative py-16 md:py-20 scroll-mt-20"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <SectionLabel num="04" title="Get in touch" kicker="Open to internships" />
+        <SectionLabel num="05" title="Get in touch" kicker="Open to internships" />
 
         <div className="grid md:grid-cols-5 gap-10 md:gap-16 items-start">
           <div className="md:col-span-3 flex flex-col gap-6">
             <p className="text-lg md:text-xl leading-relaxed text-[color:var(--color-text-muted)] text-pretty">
               Looking for summer{" "}
-              <span className="text-[color:var(--color-text)]">2026</span>{" "}
-              internships - backend, embedded, networking, anything where
-              reliability matters. If you&rsquo;re hiring, or you just want to
-              talk about a project, the shortest path is email.
+              <span className="text-[color:var(--color-text)]">2027</span>{" "}
+              internships - production ML, backend, embedded, networking,
+              anything where reliability matters. If you&rsquo;re hiring, or
+              you just want to talk about a project, the shortest path is
+              email.
             </p>
 
             <div className="flex flex-col gap-2">
@@ -103,10 +104,10 @@ export default function Contact() {
                   accepting applications for internships
                 </div>
                 <div className="text-[color:var(--color-text-muted)]">
-                  starting: summer 2026
+                  starting: summer 2027
                 </div>
                 <div className="text-[color:var(--color-text-muted)]">
-                  location: Kraków · remote · on-site (EU)
+                  location: Kraków on-site (preferred) · remote · EU
                 </div>
                 <div className="pt-2">
                   <span className="text-[color:var(--color-accent)]">
